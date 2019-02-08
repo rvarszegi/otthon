@@ -1,0 +1,6 @@
+<app-top-header></app-top-header>
+
+<div class="container-fluid">
+        <app-left-sidebar  (change)="onPageChange($event)"></app-left-sidebar>
+        <app-content [pageChange] ="pageChange"></app-content>
+</div>
