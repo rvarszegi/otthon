@@ -1,61 +1,73 @@
 <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
-    <div *ngIf="currentLink == '/'">
-        <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-            <h1 class="h2">Dashboard</h1>
-            <div class="btn-toolbar mb-2 mb-md-0">
-                <div class="btn-group mr-2">
-                    <button type="button" class="btn btn-sm btn-outline-secondary">Share</button>
-                    <button type="button" class="btn btn-sm btn-outline-secondary">Export</button>
-                </div>
-                <button type="button" class="btn btn-sm btn-outline-secondary dropdown-toggle">
-                    <span data-feather="calendar"></span>
-                    This week
+  <div *ngIf="currentLink == '/'">
+    <div
+      class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom"
+    >
+      <h1 class="h2">Dashboard</h1>
+      <div class="btn-toolbar mb-2 mb-md-0">
+        <div class="btn-group mr-2">
+          <button type="button" class="btn btn-sm btn-outline-secondary">
+            Share
+          </button>
+          <button type="button" class="btn btn-sm btn-outline-secondary">
+            Export
+          </button>
+        </div>
+        <button
+          type="button"
+          class="btn btn-sm btn-outline-secondary dropdown-toggle"
+        >
+          <span data-feather="calendar"></span>
+          This week
+        </button>
+      </div>
+    </div>
+
+    <canvas class="my-4 w-100" id="myChart" width="900" height="380"></canvas>
+
+    <h2>Section title</h2>
+    <div class="table-responsive">
+      <table class="table table-striped table-sm">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Vezetékénv</th>
+            <th>Keresztnév</th>
+            <th>Email</th>
+            <th>Telefon</th>
+            <th>Hozzátartozó</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let user of users">
+            <td>{{ user.id }}</td>
+            <td>{{ user.lastName }}</td>
+            <td>{{ user.firstName }}</td>
+            <td>{{ user.email }}</td>
+            <td>{{ user.phone }}</td>
+            <td>{{ user.relatives }}</td>
+            <td>
+              <div class="btn-group">
+                <button
+                  (click)="onChangeActive(user)"
+                  class="btn btn-sm"
+                  [ngClass]="{
+                    'btn-info': user.active,
+                    'btn-warning': !user.active
+                  }"
+                >
+                  <span *ngIf="user.active"> active</span>
+                  <span *ngIf="!user.active">inactive</span>
                 </button>
-            </div>
-        </div>
-
-        <canvas class="my-4 w-100" id="myChart" width="900" height="380"></canvas>
-
-        <h2>Section title</h2>
-        <div class="table-responsive">
-            <table class="table table-striped table-sm">
-                <thead>
-                    <tr>
-                        <th>#</th>
-                        <th>Vezetékénv</th>
-                        <th>Keresztnév</th>
-                        <th>Email</th>
-                        <th>Telefon</th>
-                        <th>Hozzátartozó</th>
-                        <th></th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr *ngFor="let user of users">
-
-                        <td>{{ user.id }}</td>
-                        <td>{{ user.lastName }}</td>
-                        <td>{{ user.firstName }}</td>
-                        <td>{{ user.email }}</td>
-                        <td>{{ user.phone }}</td>
-                        <td>{{ user.relatives }}</td>
-                        <td><button (click)="onChangeActive(user)" class="btn btn-sm" [ngClass]="{'btn-info': user.active, 'btn-warning': !user.active} ">
-                          <span *ngIf="user.active">active</span>
-                          <span *ngIf="!user.active">inactive</span>
-                        </button></td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-
+                <button class="btn btn-primary">
+                  <span class="glyphicon glyphicon-edit"></span>
+                </button>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
     </div>
-    <div *ngIf="currentLink == '/user-manager'">
-        <app-user-manager (newUser) = "onNewUser($event)"></app-user-manager>
-    </div>
-    <div *ngIf="currentLink == '/analytics'">
-        Analytics div
-    </div>
-    <div *ngIf="currentLink == '/export '">
-        Export div
-    </div>
+  </div>
 </main>

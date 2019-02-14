@@ -14,7 +14,6 @@ export class ContentComponent implements OnInit {
 
   users = [];
 
-  // tslint:disable-next-line:no-shadowed-variable
   constructor(private UserService: UserService) {}
 
     ngOnInit() {
